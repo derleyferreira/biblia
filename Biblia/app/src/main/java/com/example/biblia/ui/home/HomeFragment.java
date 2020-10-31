@@ -94,7 +94,7 @@ public class HomeFragment extends Fragment {
 
                     textoVersos.add(versos.get(i).getVerso());
                 }
-                listaVersos.setAdapter(new AdapterVersos(versos,getContext()));
+                listaVersos.setAdapter(new AdapterVersos(versos,getContext(),getActivity()));
 
             }
 
@@ -118,7 +118,7 @@ public class HomeFragment extends Fragment {
                     capitulos.add(String.valueOf( versos.get(i).getCapitulo()));
                     textoVersos.add(versos.get(i).getVerso());
                 }
-                listaVersos.setAdapter(new AdapterVersos(versos,getContext()));
+                listaVersos.setAdapter(new AdapterVersos(versos,getContext(),getActivity()));
 
                 Set set = new HashSet(capitulos);
                 capitulos.clear();
@@ -139,7 +139,7 @@ public class HomeFragment extends Fragment {
         RecyclerView.LayoutManager layout = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         listaVersos.setLayoutManager(layout);
 
-        listaVersos.setAdapter(new AdapterVersos(versos,getContext()));
+        listaVersos.setAdapter(new AdapterVersos(versos,getContext(),getActivity()));
 
         return root;
     }

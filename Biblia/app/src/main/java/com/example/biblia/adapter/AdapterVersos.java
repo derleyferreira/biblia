@@ -1,6 +1,8 @@
 package com.example.biblia.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +20,19 @@ public class AdapterVersos extends RecyclerView.Adapter {
 
     private  List<Versos> versosLista;
     private  Context context;
+    private  Activity activity;
 
-    public AdapterVersos(List<Versos> versosList, Context context){
+    private SharedPreferences sharedPreferences;
+    private int tamanhodefaul = 14;
+    private int tamanhoconfig;
+
+
+    public AdapterVersos(List<Versos> versosList, Context context, Activity activity){
        versosLista = versosList;
        this.context = context;
-
+       this.activity = activity;
+       sharedPreferences =  activity.getPreferences(Context.MODE_PRIVATE);
+       tamanhoconfig  = sharedPreferences.getInt("TamanhoFonte",tamanhodefaul);
     }
 
     @NonNull
@@ -32,6 +42,8 @@ public class AdapterVersos extends RecyclerView.Adapter {
         View view = LayoutInflater.from(context).inflate(R.layout.activity_versos_holder,parent,false);
 
         VersosViewHolder verso = new VersosViewHolder(view);
+
+
 
         return  verso;
 
@@ -45,6 +57,9 @@ public class AdapterVersos extends RecyclerView.Adapter {
         Versos verso = versosLista.get(position);
         versosHolder.txtVerso.setText(verso.getVerso());
         versosHolder.txtNroVerso.setText(String.valueOf(verso.getNumeroVerso()));
+
+        versosHolder.txtVerso.setTextSize(tamanhoconfig);
+        versosHolder.txtNroVerso.setTextSize(tamanhoconfig);
 
     }
 
