@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.preference.Preference;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,6 @@ public class ConfigFragment extends Fragment {
 
     private SeekBar seekTamanhoFonte;
     private TextView txtExemploFonte;
-    private ImageButton imgbtnSalvar;
 
     public ConfigFragment() {
         // Required empty public constructor
@@ -50,7 +50,7 @@ public class ConfigFragment extends Fragment {
 
         seekTamanhoFonte = v.findViewById(R.id.seek_TamanhoFonte);
         txtExemploFonte  = v.findViewById(R.id.txtConfigExFonte);
-        imgbtnSalvar     = v.findViewById(R.id.imgbtn_SalvarConfig);
+
 
         seekTamanhoFonte.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -69,14 +69,15 @@ public class ConfigFragment extends Fragment {
             }
         });
 
-        imgbtnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                salvaConfig();
-            }
-        });
+        carregaConfig();
 
         return  v;
+    }
+
+    @Override
+    public void onStop() {
+        salvaConfig();
+        super.onStop();
     }
 
     private void salvaConfig(){
@@ -84,6 +85,15 @@ public class ConfigFragment extends Fragment {
         SharedPreferences.Editor shEditor = sharedPreferences.edit();
         shEditor.putInt("TamanhoFonte",seekTamanhoFonte.getProgress());
         shEditor.commit();
+
+    }
+
+    private void carregaConfig(){
+        SharedPreferences sharedPreferences =  getActivity().getPreferences(Context.MODE_PRIVATE);
+        int tamanhoconfig  = sharedPreferences.getInt("TamanhoFonte",14);
+
+        seekTamanhoFonte.setProgress(tamanhoconfig);
+        txtExemploFonte.setTextSize(tamanhoconfig);
 
     }
 
