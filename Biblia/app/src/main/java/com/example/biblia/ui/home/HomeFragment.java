@@ -139,8 +139,22 @@ public class HomeFragment extends Fragment {
         RecyclerView.LayoutManager layout = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         listaVersos.setLayoutManager(layout);
 
+        listaVersos.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
+            }
+        });
+
+
         listaVersos.setAdapter(new AdapterVersos(versos,getContext(),getActivity()));
 
         return root;
     }
+
+    private void compartilhar(){
+
+    }
+
+
 }

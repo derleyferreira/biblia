@@ -20,4 +20,5 @@
     <string name="ConfigExemploFonte">No princípio, criou Deus os céus e a terra.</string>
     <string name="menu_config">Configurações</string>
     <string name="ModoEscuro">Modo Escuro</string>
+    <string name="title_activity_splash">Splash</string>
 </resources>
